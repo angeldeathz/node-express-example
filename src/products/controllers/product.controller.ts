@@ -4,17 +4,11 @@ import Product from '../domain/product.domain';
 
 class ProductController {
 
-    private readonly productRepository: ProductRepository;
-
-    constructor() {
-        this.productRepository = new ProductRepository();
-    }
-
     public async get(request: Request, response: Response, next: any) {
         try {
 
-            // const repository: ProductRepository = new ProductRepository();
-            const products = await this.productRepository.get();
+            const repository = new ProductRepository();
+            const products = await repository.get();
 
             if (products.length > 0) {
                 return response.status(200).json(products);
@@ -41,9 +35,9 @@ class ProductController {
             });
 
 
-            // const repository: ProductRepository = new ProductRepository();
+            const repository = new ProductRepository();
 
-            const usuarioResponse = await this.productRepository.save(product);
+            const usuarioResponse = await repository.save(product);
             response.status(200).json(usuarioResponse);
         } catch (error) {
             next(error);
