@@ -3,21 +3,29 @@ import bodyParser from 'body-parser';
 import Server from './src/config/server';
 import Mongo from './src/config/mongo.connection';
 import Routes from './src/config/routes';
-// import { ErrorHandler } from './src/config/error-handler';
+import { ErrorHandler } from './src/config/error-handler';
 
-// Config connection to db
-const mongodb = new Mongo();
-mongodb.connect();
+export default class Main {
 
-// Config server
-const server = new Server();
-server.app.use(bodyParser.json());
-// server.app.use(cors())
+    public async init() {
+        // Config connection to db
+        const mongodb = new Mongo();
+        mongodb.connect();
 
-const routes = new Routes(server.app);
-routes.InitRoutes();
+        // Config server
+        const server = new Server();
+        server.app.use(bodyParser.json());
+        // server.app.use(cors())
 
-// const errorHandler = new ErrorHandler(server.app);
-// errorHandler.Configure();
+        const routes = new Routes(server.app);
+        routes.InitRoutes();
 
-server.listen();
+        const errorHandler = new ErrorHandler(server.app);
+        errorHandler.Configure();
+
+        server.listen();
+    }
+}
+
+const main = new Main();
+main.init();

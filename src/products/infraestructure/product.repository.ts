@@ -1,5 +1,6 @@
 import Product from '../domain/product.domain';
 
+
 export default class ProductRepository {
 
     public async get() {

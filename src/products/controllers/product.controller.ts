@@ -4,16 +4,17 @@ import Product from '../domain/product.domain';
 
 class ProductController {
 
-    private repository: ProductRepository;
+    private readonly productRepository: ProductRepository;
 
     constructor() {
-        this.repository = new ProductRepository();
+        this.productRepository = new ProductRepository();
     }
 
     public async get(request: Request, response: Response, next: any) {
         try {
 
-            const products = await this.repository.get();
+            // const repository: ProductRepository = new ProductRepository();
+            const products = await this.productRepository.get();
 
             if (products.length > 0) {
                 return response.status(200).json(products);
@@ -39,7 +40,10 @@ class ProductController {
                 actualStock: body.actualStock
             });
 
-            const usuarioResponse = await this.repository.save(product);
+
+            // const repository: ProductRepository = new ProductRepository();
+
+            const usuarioResponse = await this.productRepository.save(product);
             response.status(200).json(usuarioResponse);
         } catch (error) {
             next(error);
