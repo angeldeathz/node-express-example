@@ -1,9 +1,9 @@
 import bodyParser from 'body-parser';
 // import cors from 'cors';
-import Server from './src/config/server';
-import Mongo from './src/config/mongo.connection';
-import Routes from './src/config/routes';
-import { ErrorHandler } from './src/config/error-handler';
+import Server from './config/server';
+import Mongo from './config/mongo.connection';
+import Routes from './config/routes';
+import { ErrorHandler } from './config/error-handler';
 
 export default class Main {
 
